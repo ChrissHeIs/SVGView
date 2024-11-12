@@ -39,8 +39,8 @@ open class SVGConstants {
 
 public class SVGParserRegexHelper {
 
-    fileprivate static let transformAttributePattern = "([a-z]+)\\(((\\-?\\d+\\.?\\d*e?\\-?\\d*\\s*,?\\s*)+)\\)"
-    fileprivate static let transformPattern = "\\-?\\d+\\.?\\d*e?\\-?\\d*"
+    fileprivate static let transformAttributePattern = "([a-z]+)\\(((\\-?\\d*\\.?\\d*e?\\-?\\d*\\s*,?\\s*)+)\\)"
+    fileprivate static let floatingPointPattern = "[+-]?(\\d+([.]\\d*)?(e[+-]?\\d+)?|[.]\\d+(e[+-]?\\d+)?)"
     fileprivate static let textElementPattern = "<text.*?>((?s:.*))<\\/text>"
     fileprivate static let maskIdenitifierPattern = "url\\(#((?s:.*))\\)"
     fileprivate static let unitsIdenitifierPattern = "([a-zA-Z]+)$"
@@ -65,7 +65,7 @@ public class SVGParserRegexHelper {
     class func getTransformMatcher() -> NSRegularExpression? {
         if self.transformMatcher == nil {
             do {
-                self.transformMatcher = try NSRegularExpression(pattern: transformPattern, options: .caseInsensitive)
+                self.transformMatcher = try NSRegularExpression(pattern: floatingPointPattern, options: .caseInsensitive)
             } catch {
 
             }
